@@ -1,5 +1,7 @@
 # Cloud Tasks API — Projeto Final de Computação em Nuvem
 
+**Integrantes:** <nome(s) e tarefas de cada um> · **Relatório:** [docs/RELATORIO.md](docs/RELATORIO.md)
+
 Aplicação Flask/SQLite preparada para um laboratório de **CI/CD com GitHub Actions, Docker, GHCR e AWS EC2**. A base contém código, testes e workflows; cabe ao grupo aprovisionar a nuvem, configurar segredos, usar branches/PRs, implementar uma evolução funcional e comprovar a esteira.
 
 ## Arquitetura
@@ -20,7 +22,8 @@ Ou execute `docker compose up --build` e abra `http://localhost:8080/health`.
 |---|---|---|
 | GET | `/` | Informações |
 | GET | `/health` | Saúde da aplicação/banco |
-| GET | `/tasks` | Lista tarefas |
+| GET | `/tasks` | Lista tarefas (filtro opcional `?done=true\|false`) |
+| DELETE | `/tasks/<id>` | Remove tarefa (204 ou 404) |
 | POST | `/tasks` | Cria tarefa (`{"title":"..."}`) |
 | PATCH | `/tasks/<id>` | Atualiza conclusão (`{"done":true}`) |
 

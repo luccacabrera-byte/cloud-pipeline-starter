@@ -38,8 +38,14 @@ def create_app(test_config=None):
 
     @app.get("/tasks")
     def list_tasks():
+        done = request.args.get("done")
+        if done not in (None, "true", "false"):
+            return jsonify(error="done deve ser true ou false"), 400
+        query, params = "SELECT id, title, done FROM tasks", ()
+        if done is not None:
+            query, params = query + " WHERE done=?", (int(done == "true"),)
         with connect() as db:
-            items = db.execute("SELECT id, title, done FROM tasks ORDER BY id").fetchall()
+            items = db.execute(query + " ORDER BY id", params).fetchall()
         return jsonify([dict(id=r["id"], title=r["title"], done=bool(r["done"])) for r in items])
 
     @app.post("/tasks")
@@ -68,7 +74,16 @@ def create_app(test_config=None):
             return jsonify(error="tarefa nao encontrada"), 404
         return jsonify(id=task_id, done=data["done"]), 200
 
+    @app.delete("/tasks/<int:task_id>")
+    def delete_task(task_id):
+        with connect() as db:
+            cursor = db.execute("DELETE FROM tasks WHERE id=?", (task_id,))
+            db.commit()
+        if not cursor.rowcount:
+            return jsonify(error="tarefa nao encontrada"), 404
+        return "", 204
+
     return app
 
 
-app = create_app()
+app =create_app()

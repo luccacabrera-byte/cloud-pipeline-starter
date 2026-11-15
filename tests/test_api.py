@@ -37,3 +37,22 @@ def test_mark_done(client):
 
 def test_not_found(client):
     assert client.patch("/tasks/999", json={"done": True}).status_code == 404
+
+
+def test_delete_task(client):
+    item = client.post("/tasks", json={"title": "Remover"}).json
+    assert client.delete(f'/tasks/{item["id"]}').status_code == 204
+    assert client.get("/tasks").json == []
+
+
+def test_delete_not_found(client):
+    assert client.delete("/tasks/999").status_code == 404
+
+
+def test_filter_by_done(client):
+    first = client.post("/tasks", json={"title": "A"}).json
+    client.post("/tasks", json={"title": "B"})
+    client.patch(f'/tasks/{first["id"]}', json={"done": True})
+    assert [t["title"] for t in client.get("/tasks?done=true").json] == ["A"]
+    assert [t["title"] for t in client.get("/tasks?done=false").json] == ["B"]
+    assert client.get("/tasks?done=talvez").status_code == 400
