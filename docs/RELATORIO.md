@@ -3,7 +3,7 @@
 ## 1. Integrantes e tarefas
 | Integrante | Tarefas |
 |---|---|
-| <NOME COMPLETO> | Trabalho individual: código (DELETE e filtro), testes, repositório, CI, EC2, deploy, documentação |
+| Lucca Trazzi | Trabalho individual: código (DELETE e filtro), testes, repositório, CI, EC2, deploy, documentação |
 
 Repositório: https://github.com/luccacabrera-byte/cloud-pipeline-starter
 Aplicação: http://54.198.10.239/health (disponível até o encerramento dos recursos)

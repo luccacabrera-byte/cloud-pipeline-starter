@@ -1,6 +1,6 @@
 # Cloud Tasks API — Projeto Final de Computação em Nuvem
 
-**Integrantes:** <nome(s) e tarefas de cada um> · **Relatório:** [docs/RELATORIO.md](docs/RELATORIO.md)
+**Integrantes:** Lucca Trazzi (trabalho individual: todas as tarefas) · **Relatório:** [docs/RELATORIO.md](docs/RELATORIO.md)
 
 Aplicação Flask/SQLite preparada para um laboratório de **CI/CD com GitHub Actions, Docker, GHCR e AWS EC2**. A base contém código, testes e workflows; cabe ao grupo aprovisionar a nuvem, configurar segredos, usar branches/PRs, implementar uma evolução funcional e comprovar a esteira.
 
